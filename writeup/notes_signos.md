@@ -39,18 +39,18 @@ Newton atractivo con corrección de corto alcance s(d) = 1 − (2/π)·arctan(2a
 
 ## La discrepancia aparente Eq. (27) vs Eq. (30) del paper
 
-- La Eq. (27) del paper escribe la expansión de la energía libre con el término
-  cuadrático con un signo que, tomado literalmente junto con su definición de
-  g(ω), daría una contribución **positiva** ∝ +ω² (fuerza repulsiva al
-  identificar G_N > 0).
-- La Eq. (30) (y la identificación de G_N en la Eq. 33) requiere el signo
-  **negativo** en el coeficiente de ω² para producir el potencial newtoniano
-  atractivo −G_N m m′/d.
+- La Eq. (27) del paper escribe la expansión de la energía libre con el
+  coeficiente cuadrático **negativo**, consistente con nuestra derivación de
+  primeros principios y con la frase del propio paper "controlled by the
+  negative sign in front of the Σω² term".
+- La Eq. (30) escribe el término con un signo que, tomado literalmente,
+  daría una contribución **positiva** ∝ +ω² (fuerza repulsiva al identificar
+  G_N > 0), en tensión con la identificación de G_N en la Eq. (33).
 
-Nuestra derivación independiente (arriba) confirma que el signo correcto es el de
-la Eq. (30): **coeficiente cuadrático negativo en la energía libre**. La Eq. (27)
-parece tener una errata de signo (o una convención intermedia no explicitada).
-Todo este repo usa la convención derivada de primeros principios:
+Nuestra derivación independiente (arriba) confirma que el signo correcto es el
+de la Eq. (27): **coeficiente cuadrático negativo en la energía libre**. La
+Eq. (30) parece tener una errata de signo (o una convención intermedia no
+explicitada). Todo este repo usa la convención derivada de primeros principios:
 
 | término | coeficiente | signo |
 |---|---|---|

@@ -18,7 +18,8 @@ corrections of linearized quantum gravity.
 2. The ℓᵢ²ℓⱼ pieces are near-zone dominated; treated non-perturbatively
 (the free energy saturates within r* = √(ℓ/T)) they yield a
 source-structure-dependent 1/d² correction. Lunar ranging then requires
-T ≳ 1e10 K at a = 1e-13 m for physical extended bodies.
+T ≳ 1e10 K at a = 1e-13 m for physical extended bodies, with an
+assumption-free three-body-only floor Λ < 8.3e-10 GeV⁻³ (T_min = 4.4 K).
 
 Repo (derivations, tests, figures): [link]
 

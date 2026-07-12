@@ -26,7 +26,7 @@ s(d) = 1−(2/π)arctan(2a/d) and the identification (paper Eq. 33)
 **G_N = σ*(1−σ*)π³L⁴/(Ta³)**. Our sign conventions are derived from first
 principles and audited numerically (attractive force; `writeup/notes_signos.md`
 documents an apparent sign inconsistency between the paper's Eqs. 27 and 30 —
-Eq. 30's sign is the correct one). Throughout, the "purely entropic point" is
+Eq. 27's sign, negative, is the correct one). Throughout, the "purely entropic point" is
 μ = −2.39936·T, σ* = 0.0832215, (1−2σ*) = 0.8335570. At μ = 0 (σ* = ½) the
 cubic term vanishes identically.
 
@@ -156,8 +156,9 @@ quote a layered bound, ε ∝ f(σ*)·√(a³/T) with f(σ) = (1−2σ)/√(σ(1
   a₀ = 1e-13 m; equivalently Λ < 8.3e-10 GeV⁻³·(δ/1e-10).
 - **Extended bodies (realistic):** **T_min(a) = 9.8e9 K · (a/1e-13 m)³ ·
   [f(σ*)/3.018]² · (1e-10/δ)²** — a room-temperature mediator at the
-  entropic point is excluded by ~7 orders of magnitude in ε; consistency
-  requires T ≳ 1e10 K (≈ 1 MeV) at the anomalous-heating floor.
+  entropic point is excluded by ~7 orders of magnitude in T (~3.8 orders
+  in ε); consistency requires T ≳ 1e10 K (≈ 1 MeV) at the
+  anomalous-heating floor.
 - The saturated point-mass evaluation (model-literal, cutoff r* = √(ℓ/T))
   lies a further ~10× above the extended-body one.
 

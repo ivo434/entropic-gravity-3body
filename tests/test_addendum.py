@@ -138,7 +138,6 @@ def test_I3_infrared_dominated_but_J_is_not():
     assert frac < 20 * a / d, f"ball fraction {frac}"
     # same split for J: the r<10a ball around the squared center holds
     # nearly everything (1 − 1/(1+100) ≈ 99%): UV-dominated
-    ball_J = 4 * np.pi * ((np.pi / 4) - a / (10 * a) ) / a  # ∫₀^{10a}4πr²dr/(r²+a²)² ≈ (π²/a)(1−…)
     # analytic: ∫₀^R r²/(r²+a²)² dr = (1/2)[−R/(R²+a²) + arctan(R/a)/a]·4π
     R = 10 * a
     ball_J = 4 * np.pi * 0.5 * (-R / (R**2 + a**2) + np.arctan(R / a) / a)
