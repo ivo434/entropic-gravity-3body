@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this code or the results, please cite it as below."
+title: "entropic-gravity-3body: exact three-body force and LLR constraint for the local entropic-gravity model"
+authors:
+  - family-names: "Latascheff"
+    given-names: "Iván"
+year: 2026
+url: "https://github.com/ivo434/entropic-gravity-3body"
+license: MIT

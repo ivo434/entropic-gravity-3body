@@ -29,7 +29,7 @@ Derivations (see writeup/three_body_entropic.md for details):
 
      I₃(x₁, x₂, x₃; a=0) = π³ / (d₁₂ · d₁₃ · d₂₃)
 
-   In particular I₃·d³ = π³ for the equilateral triangle — the conjecture.
+   In particular I₃·d³ = π³ for the equilateral triangle, which was the conjecture.
 """
 
 import numpy as np

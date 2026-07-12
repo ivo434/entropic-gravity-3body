@@ -1,4 +1,4 @@
-"""Addendum 1 — non-perturbative anomalous correction and the 2.3 decision.
+"""Non-perturbative anomalous correction and the choice of observable.
 
 Run:  .venv/bin/python notebooks/task2b_nonperturbative.py
 Outputs: figures/llr_constraint.png (updated) + console decision report.
@@ -60,13 +60,13 @@ for name, m, R in [("Sun", M_SUN, R_SUN), ("Earth", M_EARTH, R_EARTH),
 print("""
   → Saturation suppresses the point-mass anomalous term by a_eff ≈ a·S_pert/S
     ~ r*-scale instead of a. Note r* < R_body for all three bodies: REAL
-    (extended) bodies never reach saturation — their perturbative treatment
+    (extended) bodies never reach saturation, so their perturbative treatment
     with X = 6/(5R) stands. The saturated numbers below are the model-literal
     answer for true point masses.""")
 
 # ------------------------------------------------- C: decision table 2.3
 print("=" * 76)
-print("C.  Decision table: ε modulation at benchmark by treatment")
+print("C.  Decision table: epsilon modulation at benchmark by treatment")
 print("=" * 76)
 rows = []
 for mode, only, label in [
@@ -84,13 +84,13 @@ eps_ext = rows[2][1]["amp"]
 eps_v3 = rows[3][1]["amp"]
 print(f"""
   DECISION (documented): the saturated point-mass anomalous term
-  ({eps_sat:.1e}) is NOT ≪ V₃ ({eps_v3:.1e}) — it exceeds it — so the
+  ({eps_sat:.1e}) is NOT ≪ V₃ ({eps_v3:.1e}), it exceeds it, so the
   anomalous term cannot be dropped in general. BUT its size depends on the
   source model (r* vs R_body vs a). We therefore quote a LAYERED bound:
-    (i)  headline / bulletproof: V₃ ONLY — no dependence on source structure
+    (i)  headline / bulletproof: V₃ ONLY, with no dependence on source structure
          or on the near-zone treatment; pure closed-form physics.
     (ii) realistic: extended bodies (physical Sun/Earth/Moon, which never
-         saturate since r* < R) — anomalous term included, ~3x stronger.
+         saturate since r* < R), anomalous term included, ~3x stronger.
   The point-mass numbers are reported as model-internal only.""")
 
 # ------------------------------------------------- D: layered bounds + figure

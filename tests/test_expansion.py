@@ -1,4 +1,4 @@
-"""Gate 0.2 — symbolic regression: expansion of g(ω) to O(ω³).
+"""Gate 0.2, symbolic regression: expansion of g(ω) to O(ω³).
 
 g(ω) = −T·ln(1 + e^{(μ−ω)/T}),  σ* = 1/(e^{−μ/T} + 1)
 

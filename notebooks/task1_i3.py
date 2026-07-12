@@ -1,4 +1,4 @@
-"""Task 1 — I₃: grid convergence (Richardson), a→0 limit, isosceles sweep.
+"""Task 1. I₃: grid convergence (Richardson), a→0 limit, isosceles sweep.
 
 Run:  .venv/bin/python notebooks/task1_i3.py
 Outputs: figures/i3_isosceles.png + console tables.

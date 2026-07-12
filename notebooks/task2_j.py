@@ -1,9 +1,9 @@
-"""Task 2 — anomalous two-body correction: J(d), power law, δV₂/V₂.
+"""Task 2. Anomalous two-body correction: J(d), power law, δV₂/V₂.
 
 Run:  .venv/bin/python notebooks/task2_j.py
 Outputs: figures/j_powerlaw.png + console tables.
 
-KEY DEVIATION FROM THE SPEC (verified, exact):
+KEY FINDING (verified, exact):
   J does NOT converge without regulator. Closed form (sympy-verified):
       J(d, a) = π²/(a·(d² + 4a²))
   → linearly divergent as a→0 (the ∫d³ρ/ρ⁴ singularity at the squared
@@ -33,7 +33,7 @@ A = 1.0  # work in units of the lattice spacing; J depends only on d/a (×1/a³)
 
 # --------------------------------------------------- 2.1 numeric J over d/a
 print("=" * 74)
-print("2.1  J(d) for d/a ∈ [10, 1e4] — mpmath Feynman quadrature (30 digits)")
+print("2.1  J(d) for d/a in [10, 1e4], mpmath Feynman quadrature (30 digits)")
 print("     vs closed form π²/(a(d²+4a²));  3D-grid spot checks at d/a ≤ 100")
 print("=" * 74)
 mp.mp.dps = 30
@@ -84,7 +84,7 @@ print("     figure saved: figures/j_powerlaw.png")
 # --------------------------------------------------- 2.3 δV₂/V₂
 print()
 print("=" * 74)
-print("2.3  δV₂/V₂ — analytic ratio and scaling check")
+print("2.3  δV₂/V₂: analytic ratio and scaling check")
 print("=" * 74)
 print("""
   δV₂ = +[σ*(1−σ*)(1−2σ*)/(2T²)]·(ℓᵢ²ℓⱼ + ℓᵢℓⱼ²)/a³·J(d)

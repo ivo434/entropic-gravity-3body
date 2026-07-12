@@ -1,4 +1,4 @@
-"""Gates 0.3 / 0.4 — numeric regression against preliminary exploration, and
+"""Gates 0.3 / 0.4, numeric regression against preliminary exploration, and
 sign audit of the two-body force.
 
 Regression values (a = 0.05, baseline grid nr=220, nth=96, nph=96):
@@ -45,7 +45,7 @@ def equilateral(d):
 # d=8 (a/d = 6.25e-3) has narrow Lorentzian peaks relative to R0 = 2d and
 # needs a finer grid: at the baseline grid the discretization error is 0.62%,
 # converging monotonically to the regression value (5.975e-2 at 2× grid,
-# 5.981e-2 at 3× — within 0.05% of 5.9783e-2). Verified via Richardson study.
+# 5.981e-2 at 3x, within 0.05% of 5.9783e-2). Verified via Richardson study.
 @pytest.mark.parametrize(
     "d,expected,grid",
     [

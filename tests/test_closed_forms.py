@@ -27,7 +27,7 @@ def test_I2_general_reduces_to_paper_form():
 
 def test_I2_general_closed_form_sympy():
     # Fourier route: I₂(d;a,b) = (4π⁴/(2π)³)·(4π/d)·∫₀^∞ dk e^{−(a+b)k} sin(kd)/k
-    # and the radial integral is arctan(d/(a+b)) — fully symbolic.
+    # and the radial integral is arctan(d/(a+b)), fully symbolic.
     k = sp.Symbol("k", positive=True)
     d, a, b = sp.symbols("d a b", positive=True)
     # Differentiate under the integral sign in d (the integrand vanishes at
@@ -46,7 +46,7 @@ def test_I2_general_closed_form_sympy():
 
 
 def test_J_closed_form_sympy():
-    # J = −∂I₂(d;a,b)/∂(a²)|_{b=a} = −(1/2a)·∂_a I₂|_{b=a} — symbolic, exact.
+    # J = −∂I₂(d;a,b)/∂(a²)|_{b=a} = −(1/2a)·∂_a I₂|_{b=a}, symbolic and exact.
     d, a, b = sp.symbols("d a b", positive=True)
     I2_sym = 2 * sp.pi**2 / d * sp.atan(d / (a + b))
     J_sym = sp.simplify((-sp.diff(I2_sym, a) / (2 * a)).subs(b, a))
@@ -74,7 +74,7 @@ def test_J_numeric_vs_closed():
 
 
 def test_J_diverges_as_inverse_a():
-    # J·a·(d²+4a²) is constant = π² — J does NOT converge as a → 0
+    # J·a·(d²+4a²) is constant = π², so J does NOT converge as a → 0
     for a in [0.1, 0.01, 0.001]:
         assert abs(J_closed(1.0, a) * a * (1 + 4 * a**2) / np.pi**2 - 1) < 1e-14
 

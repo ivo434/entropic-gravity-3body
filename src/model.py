@@ -1,6 +1,6 @@
 """Physical model: local entropic-gravity qubit lattice (Carney et al. 2025).
 
-Conventions (audited from first principles, see writeup/notes_signos.md):
+Conventions (audited from first principles, see writeup/notes_signs.md):
 
   g(ω) = g(0) + σ*·ω − [σ*(1−σ*)/(2T)]·ω²
               + [σ*(1−σ*)(1−2σ*)/(6T²)]·ω³ + O(ω⁴)

@@ -1,4 +1,4 @@
-"""Task 3 — Sun-Earth-Moon: ε(φ), sanity formula, and the LLR bound on T.
+"""Task 3. Sun-Earth-Moon: ε(φ), sanity formula, and the LLR bound on T.
 
 Run:  .venv/bin/python notebooks/task3_llr.py
 Outputs: figures/llr_constraint.png, figures/eps_phase.png + console report.
@@ -34,7 +34,7 @@ for phi_deg in [0, 45, 90, 135, 180]:
     I3 = I3_star_triangle(xS, xE, xM)
     dMS = np.linalg.norm(xM - xS)
     print(f"  {phi_deg:8d}  {dMS/METER:12.4e}  {I3*D_EM*D_ES*dMS/np.pi**3:24.6f}")
-print("  (I₃ = π³/(d_ES·d_EM·d_MS) exactly — column must be 1)")
+print("  (I₃ = π³/(d_ES·d_EM·d_MS) exactly, so the column must be 1)")
 print(f"\n  J(d,a)·a·d² /π² per pair (must be ≈1: J = π²/(a·d²) at d ≫ a):")
 for name, d in [("EM", D_EM), ("ES", D_ES)]:
     print(f"    {name}: {J_closed(d, A0)*A0*d**2/np.pi**2:.12f}")
@@ -45,7 +45,7 @@ print("=" * 76)
 print("3.2  ε(φ) at benchmark (σ*=0.0832215, T=300 K, a=1e-13 m)")
 print("=" * 76)
 for extended, label in [(True, "EXTENDED bodies (uniform spheres, X=6/5R)"),
-                        (False, "POINT masses (X=1/πa — spec baseline)")]:
+                        (False, "POINT masses (X=1/πa, point-mass baseline)")]:
     print(f"\n  --- {label} ---")
     r = perturbation(np.radians(90.0), SIG, T0, A0, extended=extended)
     aN = r["aN"]
@@ -107,7 +107,7 @@ print("""
   Exact identity: |F₃|/|F_N| = (1−2σ*)·ω_d/T for the equilateral (net forces;
   both carry the same √3). The spec's benchmark R ~ 7e-13 is reproduced by
   the [(1−2σ*)/3] variant for m = 1 g (7.2e-13); for m = 1 mg all variants
-  give ~1e-15–1e-16. The quoted 7e-13 corresponds to gram-scale masses —
+  give ~1e-15 to 1e-16. The quoted 7e-13 corresponds to gram-scale masses,
   apparent unit slip in the preliminary exploration; formula itself VERIFIED.""")
 
 # ---------------------------------------------------------------- 3.4 bound

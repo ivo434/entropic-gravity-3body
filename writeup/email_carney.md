@@ -11,7 +11,7 @@ worked through the local model in detail, computing the first term beyond
 your ω² truncation. Two findings:
 
 1. The ω³ cross-term generates a pure three-body potential with the exact
-closed form V₃ = (1−2σ*)·G·m₁m₂m₃·L²/(T·d₁₂d₁₃d₂₃) — the integral is the
+closed form V₃ = (1−2σ*)·G·m₁m₂m₃·L²/(T·d₁₂d₁₃d₂₃); the integral is the
 D=3 star-triangle uniqueness point. Long-range, unlike the r⁻⁵ three-body
 corrections of linearized quantum gravity.
 

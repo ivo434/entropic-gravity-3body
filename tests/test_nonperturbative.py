@@ -1,4 +1,4 @@
-"""Addendum 1 gates.
+"""Star-triangle limit and non-perturbative (Moebius) consistency gates.
 
 A. I₃·(r₁₂r₁₃r₂₃)/π³ → 1 as a → 0, three geometries; correction structure
    1 − (2a/π)·Σᵢ 1/dᵢ (one factor 2/π per regulated denominator).
@@ -31,7 +31,7 @@ def geometries():
     # isosceles, apex 30°, legs 1 → base 2·sin15°
     base = 2 * np.sin(np.radians(15))
     iso = [(0, 0, 0), (base, 0, 0), (base / 2, np.sqrt(1 - base**2 / 4), 0)]
-    # scalene sides (1, 1.5, 2) — the addendum's benchmark
+    # scalene sides (1, 1.5, 2), the verification benchmark
     x = (1 + 4 - 2.25) / 4  # place: d12=2, d13=1, d23=1.5
     sc = [(0, 0, 0), (2, 0, 0), (x, np.sqrt(1 - x**2), 0)]
     return {"equilateral": eq, "isosceles30": iso, "scalene(1,1.5,2)": sc}
@@ -58,10 +58,10 @@ def test_I3_a_to_0_three_geometries(name, pos):
 
 
 def test_addendum_scalene_regression():
-    # addendum: (1,1.5,2), a=0.008 → I₃/pred = 0.9897 (their 3D grid).
-    # Exact Feynman quadrature gives 0.98766; the 2e-3 gap is their grid
-    # error (same size as the baseline-grid error found in Task 0 for
-    # I₃ at d=8). Structural prediction 1−(2a/π)Σ1/dᵢ = 0.98897 brackets it.
+    # independent 3D-grid check: (1,1.5,2), a=0.008 gave I₃/pred = 0.9897.
+    # Exact Feynman quadrature gives 0.98766; the 2e-3 gap is that grid's
+    # discretization error. Structural prediction 1−(2a/π)Σ1/dᵢ = 0.98897
+    # brackets both.
     ratio = I3_feynman(1, 1.5, 2, 0.008) / (np.pi**3 / (1 * 1.5 * 2))
     assert abs(ratio - 0.9897) < 4e-3
     assert abs(ratio - (1 - (2 * 0.008 / np.pi) * (1 + 1 / 1.5 + 1 / 2))) < 1.5e-3

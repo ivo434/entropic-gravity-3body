@@ -21,7 +21,7 @@ response in the partner's field, w = ℓ_partner/d² ≪ T):
   A₂(d) = −[σ*(1−σ*)/T]·(ℓ₁ℓ₂/a³)·I₂(d,a)  +  [ℓ₂S(ℓ₁)+ℓ₁S(ℓ₂)]/(a³d²)
 
 Perturbative limit (ℓ/a² ≪ T): S → 3c₃·ℓ²·π²/a, reproducing the J-term.
-Saturated limit (r* ≫ a): S ~ O(σ-dependent)·r*³ — the effective UV cutoff
+Saturated limit (r* ≫ a): S ~ O(σ-dependent)·r*³, so the effective UV cutoff
 of the anomalous term is r*, not a.
 """
 

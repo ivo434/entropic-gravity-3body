@@ -8,8 +8,8 @@ I₃ = π³/(d₁₂·d₁₃·d₂₃) integrated over the mass distributions:
 
 with A ≡ (1−2σ*)·G_N·L²/T and Xᵢ = ⟨1/r₁₂⟩ over body i:
   Xᵢ = 6/(5Rᵢ)   uniform sphere of radius Rᵢ  (extended, defensible)
-  Xᵢ = 1/(π·a)   point mass regulated by the lattice spacing (spec baseline;
-                 cutoff-dominated — the ω-expansion is invalid at r ~ a from
+  Xᵢ = 1/(π·a)   point mass regulated by the lattice spacing (naive baseline;
+                 cutoff-dominated; the ω-expansion is invalid at r ~ a from
                  a point mass, so this massively overestimates the effect)
 
 Both follow from the same object: W_iij = 3·c₃·(π³L⁶/a³)·mᵢ²mⱼ·⟨1/r₁₂⟩ᵢ/d²,
@@ -74,11 +74,11 @@ def accel_V3(xS, xE, xM, mS, mE, mM, C3):
 def perturbation(phi, sigma, T, a, extended=True, mode=None):
     """δa_rel = δa_M − δa_E from all ω³ terms, at lunar phase φ.
 
-    mode: 'extended'  — uniform spheres, X = 6/(5R), perturbative cubic
+    mode: 'extended'  : uniform spheres, X = 6/(5R), perturbative cubic
                         (valid: real bodies never saturate, ω/T ≪ 1 inside)
-          'point'     — point masses with lattice cutoff, X = 1/(πa)
+          'point'     : point masses with lattice cutoff, X = 1/(πa)
                         (cutoff-dominated; NOT a model prediction)
-          'saturated' — point masses, NON-perturbative Möbius result:
+          'saturated' : point masses, NON-perturbative Möbius result:
                         pair coefficient (ℓⱼS(ℓᵢ)+ℓᵢS(ℓⱼ))/a³ with the
                         saturation moment S (effective cutoff r*=√(ℓ/T))
     `extended` kept for backward compatibility (True→'extended', False→'point').
@@ -138,7 +138,7 @@ def perturbation(phi, sigma, T, a, extended=True, mode=None):
 def eps_modulation(sigma, T, a, extended=True, nphi=360, mode=None, only=None):
     """Mean and modulation amplitude of ε(φ) = δa_radial/a_N over a month.
 
-    only: optional list of component-name substrings — restrict the signal
+    only: optional list of component-name substrings; restrict the signal
     to those parts (e.g. ['V3'] for the pure three-body observable).
     """
     phis = np.linspace(0, 2 * np.pi, nphi, endpoint=False)
@@ -160,7 +160,7 @@ def eps_modulation(sigma, T, a, extended=True, nphi=360, mode=None, only=None):
         "mean": float(np.mean(eps)),
         "amp": float((eps.max() - eps.min()) / 2),
         "fourier_c1": float(2 * np.abs(F[1])),  # monthly (synodic) harmonic
-        "fourier_c2": float(2 * np.abs(F[2])),  # fortnightly — dominates (tidal)
+        "fourier_c2": float(2 * np.abs(F[2])),  # fortnightly, dominates (tidal)
         "eps": eps,
         "phis": phis,
     }

@@ -24,8 +24,8 @@ g(ω) = g(0) + σ*ω − [σ*(1−σ*)/2T]·ω² + [σ*(1−σ*)(1−2σ*)/6T²]
 term reproduces Newton: V₂(d) = −G_N·mᵢmⱼ·s(d)/d with
 s(d) = 1−(2/π)arctan(2a/d) and the identification (paper Eq. 33)
 **G_N = σ*(1−σ*)π³L⁴/(Ta³)**. Our sign conventions are derived from first
-principles and audited numerically (attractive force; `writeup/notes_signos.md`
-documents an apparent sign inconsistency between the paper's Eqs. 27 and 30 —
+principles and audited numerically (attractive force; `writeup/notes_signs.md`
+documents an apparent sign inconsistency between the paper's Eqs. 27 and 30;
 Eq. 27's sign, negative, is the correct one). Throughout, the "purely entropic point" is
 μ = −2.39936·T, σ* = 0.0832215, (1−2σ*) = 0.8335570. At μ = 0 (σ* = ½) the
 cubic term vanishes identically.
@@ -67,7 +67,7 @@ Thus the entropic model generates a three-body potential
 
 repulsive for σ* < ½, scaling as 1/d³ at overall separation d. Contrast:
 in linearized quantum gravity the leading quantum three-body correction found
-by Hu & Yu (arXiv:2201.06200) falls as r_A⁻⁵r_B⁻⁵r_C⁻⁵ — parametrically far
+by Hu & Yu (arXiv:2201.06200) falls as r_A⁻⁵r_B⁻⁵r_C⁻⁵, parametrically far
 steeper. A 1/(d₁₂d₁₃d₂₃) three-body force of gravitational-ish strength is a
 distinctive, genuinely long-range signature of the entropic mechanism.
 For equal masses on an equilateral triangle the exact net-force ratio is
@@ -83,9 +83,9 @@ J has the exact closed form (sympy-verified via J = −∂I₂(d;a,b)/∂a²|_{b
 **J(d,a) = π²/[a·(d²+4a²)]** → π²/(a·d²) for d ≫ a.
 
 **J is linearly divergent as a → 0**: it is dominated by lattice sites within
-~a of the mass (a 10a-ball split puts >85% of J inside, versus O(a/d) of I₃ —
-verified in `tests/test_addendum.py`), exactly where ω/T ≫ 1 for a point mass
-and the ω-expansion is invalid — there g(ω) saturates (Fermi). **The
+~a of the mass (a 10a-ball split puts >85% of J inside, versus O(a/d) of I₃;
+verified in `tests/test_nonperturbative.py`), exactly where ω/T ≫ 1 for a point mass
+and the ω-expansion is invalid: there g(ω) saturates (Fermi). **The
 perturbative m²m′ term is therefore an artifact of the truncation, not a
 model prediction.** The three-body term, by contrast, is infrared-dominated
 and trustworthy.
@@ -110,15 +110,15 @@ suppression is dramatic: S/S_pert ≈ 5e-21 for the Sun (a_eff ≈ 2e7 m ~ r*
 instead of a = 1e-13 m).
 
 The residual anomalous term still scales as mᵢmⱼ(mᵢ+mⱼ)-like with a 1/d²
-tail, and — for physical extended sources, which never saturate
-(r* < R_body for Sun, Earth and Moon at all relevant T) — takes the
+tail, and, for physical extended sources, which never saturate
+(r* < R_body for Sun, Earth and Moon at all relevant T), takes the
 perturbative extended-body form
 
 δV₂^(ij) = W_iij + W_jji,  **W_iij = ½(1−2σ*)·(G_N·mᵢ²mⱼ·L²/T)·⟨1/r₁₂⟩ᵢ/d²,**
 
 with ⟨1/r₁₂⟩ᵢ the mean inverse separation of mass elements in body i
 (= 6/5Rᵢ for a uniform sphere). Either way the term probes source structure
-(⟨1/r₁₂⟩ or r*) — a violation of the effacement of internal structure that
+(⟨1/r₁₂⟩ or r*): a violation of the effacement of internal structure that
 Newtonian gravity enjoys.
 
 ## 3. Sun-Earth-Moon and the LLR constraint
@@ -131,15 +131,15 @@ relative to Earth from (i) V₃(S,E,M) and (ii) the pair terms, as a function
 of the lunar phase φ. All the physics beyond Newton enters through
 **Λ ≡ (1−2σ*)·L²/T**; LLR bounds Λ, and T_min follows at fixed (a, σ*).
 Modulation amplitudes of ε(φ) = δa_radial/a_N at the benchmark (entropic σ*,
-T = 300 K, a = 1e-13 m — the paper's anomalous-heating floor), by treatment
+T = 300 K, a = 1e-13 m, the paper's anomalous-heating floor), by treatment
 of the anomalous term:
 
 | treatment | ε modulation |
 |---|---|
-| point masses, perturbative (cutoff a) — truncation artifact | 1.0e15 |
+| point masses, perturbative (cutoff a): truncation artifact | 1.0e15 |
 | point masses, non-perturbative Möbius (cutoff r*) | 5.5e-6 |
 | extended uniform spheres, perturbative (physical bodies) | 5.7e-7 |
-| V₃ only — structure-independent floor | 1.2e-11 |
+| V₃ only: structure-independent floor | 1.2e-11 |
 
 The ℓ_Sun² leg dominates the anomalous term, but the Sun-Moon and Sun-Earth
 pieces nearly cancel in the relative acceleration; the observable residual is
@@ -152,10 +152,10 @@ quote a layered bound, ε ∝ f(σ*)·√(a³/T) with f(σ) = (1−2σ)/√(σ(1
 (scaling verified numerically to 3e-4):
 
 - **V₃ only (assumption-free):** T_min(a₀) = 4.4 K at δ = 1e-10, 436 K at
-  δ = 1e-11 — the latter already grazing a room-temperature mediator at
+  δ = 1e-11; the latter already grazes a room-temperature mediator at
   a₀ = 1e-13 m; equivalently Λ < 8.3e-10 GeV⁻³·(δ/1e-10).
 - **Extended bodies (realistic):** **T_min(a) = 9.8e9 K · (a/1e-13 m)³ ·
-  [f(σ*)/3.018]² · (1e-10/δ)²** — a room-temperature mediator at the
+  [f(σ*)/3.018]² · (1e-10/δ)²**. A room-temperature mediator at the
   entropic point is excluded by ~7 orders of magnitude in T (~3.8 orders
   in ε); consistency requires T ≳ 1e10 K (≈ 1 MeV) at the
   anomalous-heating floor.
