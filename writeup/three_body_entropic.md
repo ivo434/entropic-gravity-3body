@@ -166,8 +166,9 @@ The exclusion is self-consistent: on the boundary ω/T ≪ 1 everywhere,
 including inside the Sun (ω_center/T ∝ √(a³/T) is constant along T ∝ a³
 lines and ≈ 3e-6 on the extended δ=1e-10 boundary). See
 `figures/llr_constraint.png` (both boundaries in the (T,a) plane, entropic
-point marked, expansion-invalid region shaded separately) and
-`figures/eps_phase.png`.
+point marked, expansion-invalid region shaded separately),
+`figures/llr_constraint_scaling.png` (single-boundary scaling view with the
+T ∝ a³ structure) and `figures/eps_phase.png`.
 
 ## 4. Honest limitations
 
@@ -200,5 +201,5 @@ D'Eramo, Parisi & Peliti (1971).
 ## Reproduction
 
 All numbers above: `pytest tests/` (33 tests: symbolic expansion, integrator
-regression, closed forms, sign audit, addendum gates incl. the 1% Möbius
-consistency gate) and `notebooks/task{1,2,2b,3}_*.py`.
+regression, closed forms, sign audit, non-perturbative consistency gates
+incl. the 1% Möbius gate) and `notebooks/task{1,2,2b,3}_*.py`.

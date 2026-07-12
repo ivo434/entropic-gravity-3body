@@ -1,7 +1,9 @@
 """Task 3. Sun-Earth-Moon: ε(φ), sanity formula, and the LLR bound on T.
 
 Run:  .venv/bin/python notebooks/task3_llr.py
-Outputs: figures/llr_constraint.png, figures/eps_phase.png + console report.
+Outputs: figures/llr_constraint_scaling.png (single-boundary scaling view),
+figures/eps_phase.png + console report. The main two-boundary constraint
+figure (figures/llr_constraint.png) is produced by task2b_nonperturbative.py.
 """
 
 import sys
@@ -189,8 +191,8 @@ ax.set_title("LLR constraint on the local entropic-gravity model "
 ax.legend(loc="upper left", fontsize=8.5)
 ax.grid(alpha=0.3, which="both")
 fig.tight_layout()
-fig.savefig(FIGDIR / "llr_constraint.png", dpi=160)
-print("\n  figures saved: figures/eps_phase.png, figures/llr_constraint.png")
+fig.savefig(FIGDIR / "llr_constraint_scaling.png", dpi=160)
+print("\n  figures saved: figures/eps_phase.png, figures/llr_constraint_scaling.png")
 
 print("""
 3.5  EXPLICIT ASSUMPTION (not resolved here): the adiabatic derivation

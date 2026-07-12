@@ -57,7 +57,7 @@ def test_I3_a_to_0_three_geometries(name, pos):
         prev_dev = dev
 
 
-def test_addendum_scalene_regression():
+def test_scalene_grid_crosscheck():
     # independent 3D-grid check: (1,1.5,2), a=0.008 gave I₃/pred = 0.9897.
     # Exact Feynman quadrature gives 0.98766; the 2e-3 gap is that grid's
     # discretization error. Structural prediction 1−(2a/π)Σ1/dᵢ = 0.98897
