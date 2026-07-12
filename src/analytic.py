@@ -80,3 +80,32 @@ def I3_feynman(d12, d13, d23, a=0.0, epsrel=1e-11):
     val, err = dblquad(integrand, 0, 1, 0, lambda x: 1 - x,
                        epsabs=0, epsrel=epsrel)
     return (np.pi**2 / 2) * val
+
+
+def I3_feynman_1d(d12, d13, d23, dps=30):
+    """I₃ at a=0 via analytic inner Feynman integral + 1D mpmath quadrature.
+
+    Robust for extremely hierarchical triangles (e.g. solar: 1 : 1 : 2.6e-3)
+    where 2D adaptive quadrature fails. With z = 1−x−y,
+    Δ = αy² + βy + γ, α = −d₂₃², β = x(d₁₂²−d₁₃²−d₂₃²)+d₂₃², γ = x d₁₃²(1−x),
+    and ∫dy Δ^{−3/2} = 2(2αy+β)/((4αγ−β²)·√Δ).
+    """
+    import mpmath as mp
+
+    mp.mp.dps = dps
+    A2, B2, C2 = mp.mpf(d23) ** 2, mp.mpf(d13) ** 2, mp.mpf(d12) ** 2
+
+    def inner(x):
+        al = -A2
+        be = x * (C2 - B2 - A2) + A2
+        ga = x * B2 * (1 - x)
+        disc = 4 * al * ga - be**2
+
+        def F(y):
+            delta = (al * y + be) * y + ga
+            return 2 * (2 * al * y + be) / (disc * mp.sqrt(delta))
+
+        return F(1 - x) - F(0)
+
+    val = mp.quad(inner, [0, 0.5, 1])
+    return float(mp.pi**2 / 2 * val)

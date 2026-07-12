@@ -71,24 +71,46 @@ def accel_V3(xS, xE, xM, mS, mE, mM, C3):
     return aM, aE
 
 
-def perturbation(phi, sigma, T, a, extended=True):
+def perturbation(phi, sigma, T, a, extended=True, mode=None):
     """δa_rel = δa_M − δa_E from all ω³ terms, at lunar phase φ.
+
+    mode: 'extended'  — uniform spheres, X = 6/(5R), perturbative cubic
+                        (valid: real bodies never saturate, ω/T ≪ 1 inside)
+          'point'     — point masses with lattice cutoff, X = 1/(πa)
+                        (cutoff-dominated; NOT a model prediction)
+          'saturated' — point masses, NON-perturbative Möbius result:
+                        pair coefficient (ℓⱼS(ℓᵢ)+ℓᵢS(ℓⱼ))/a³ with the
+                        saturation moment S (effective cutoff r*=√(ℓ/T))
+    `extended` kept for backward compatibility (True→'extended', False→'point').
 
     Returns dict with the vector, its radial (along Earth→Moon) component,
     the Newtonian relative acceleration, and per-component breakdown.
     """
+    if mode is None:
+        mode = "extended" if extended else "point"
     xS, xE, xM = geometry(phi)
     A = prefactor_A(sigma, T, a)
 
-    if extended:
-        XS, XE, XM = 6 / (5 * R_SUN), 6 / (5 * R_EARTH), 6 / (5 * R_MOON)
-    else:
-        XS = XE = XM = 1 / (np.pi * a)
+    if mode == "saturated":
+        from .model import L4_from_GN
+        from .nonperturbative import S_moment
 
-    # pair coefficients C = (A/2)·(mᵢ²mⱼXᵢ + mⱼ²mᵢXⱼ)
-    C_SE = (A / 2) * (M_SUN**2 * M_EARTH * XS + M_EARTH**2 * M_SUN * XE)
-    C_SM = (A / 2) * (M_SUN**2 * M_MOON * XS + M_MOON**2 * M_SUN * XM)
-    C_EM = (A / 2) * (M_EARTH**2 * M_MOON * XE + M_MOON**2 * M_EARTH * XM)
+        L2 = np.sqrt(L4_from_GN(sigma, T, a))
+        mu = T * np.log(sigma / (1 - sigma))
+        lS, lE, lM = M_SUN * L2, M_EARTH * L2, M_MOON * L2
+        SS, SE_, SM_ = (S_moment(l, T, mu, a) for l in (lS, lE, lM))
+        C_SE = (lE * SS + lS * SE_) / a**3
+        C_SM = (lM * SS + lS * SM_) / a**3
+        C_EM = (lM * SE_ + lE * SM_) / a**3
+    else:
+        if mode == "extended":
+            XS, XE, XM = 6 / (5 * R_SUN), 6 / (5 * R_EARTH), 6 / (5 * R_MOON)
+        else:
+            XS = XE = XM = 1 / (np.pi * a)
+        # pair coefficients C = (A/2)·(mᵢ²mⱼXᵢ + mⱼ²mᵢXⱼ)
+        C_SE = (A / 2) * (M_SUN**2 * M_EARTH * XS + M_EARTH**2 * M_SUN * XE)
+        C_SM = (A / 2) * (M_SUN**2 * M_MOON * XS + M_MOON**2 * M_SUN * XM)
+        C_EM = (A / 2) * (M_EARTH**2 * M_MOON * XE + M_MOON**2 * M_EARTH * XM)
     C3 = A * M_SUN * M_EARTH * M_MOON
 
     aM_SM, _ = accel_pair(xM, xS, M_MOON, M_SUN, C_SM)
@@ -113,14 +135,26 @@ def perturbation(phi, sigma, T, a, extended=True):
     }
 
 
-def eps_modulation(sigma, T, a, extended=True, nphi=360):
-    """Mean and modulation amplitude of ε(φ) = δa_radial/a_N over a month."""
+def eps_modulation(sigma, T, a, extended=True, nphi=360, mode=None, only=None):
+    """Mean and modulation amplitude of ε(φ) = δa_radial/a_N over a month.
+
+    only: optional list of component-name substrings — restrict the signal
+    to those parts (e.g. ['V3'] for the pure three-body observable).
+    """
     phis = np.linspace(0, 2 * np.pi, nphi, endpoint=False)
-    eps = np.array(
-        [perturbation(p, sigma, T, a, extended)["radial"] for p in phis]
-    )
     aN = G_NEWTON * (M_EARTH + M_MOON) / D_EM**2
-    eps = eps / aN
+
+    def radial(p):
+        r = perturbation(p, sigma, T, a, extended, mode=mode)
+        if only is None:
+            return r["radial"]
+        xS, xE, xM = geometry(p)
+        u, _ = _unit(xM - xE)
+        vec = sum(v for k, v in r["parts"].items()
+                  if any(s in k for s in only))
+        return float(np.dot(vec, u))
+
+    eps = np.array([radial(p) for p in phis]) / aN
     F = np.fft.rfft(eps) / nphi
     return {
         "mean": float(np.mean(eps)),

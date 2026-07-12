@@ -7,34 +7,43 @@ arXiv:2502.17575).
 **Headline results**
 
 - Exact closed form for the three-body integral:
-  `I₃(a=0) = π³/(d₁₂·d₁₃·d₂₃)` (proof by conformal inversion; the π³
-  conjecture for the equilateral is a theorem). → three-body potential
+  `I₃(a=0) = π³/(d₁₂·d₁₃·d₂₃)` — the D=3 star-triangle uniqueness point
+  (Symanzik 1972; self-contained proof by conformal inversion in the
+  writeup). → three-body potential
   `V₃ = (1−2σ*)·G·m₁m₂m₃·L²/(T·d₁₂d₁₃d₂₃)`.
-- Exact closed form `J(d,a) = π²/(a·(d²+4a²))` for the anomalous m²m′
-  two-body correction; it is UV-dominated (linearly divergent as a→0), and
-  for extended sources becomes `∝ ⟨1/r₁₂⟩_body/d²` — source-structure
-  dependent.
-- Lunar laser ranging bound (fortnightly modulation, extended bodies):
-  `T ≳ 1e10 K · (a/1e-13 m)³` at the purely entropic point (δ = 1e-10).
+- The perturbative anomalous m²m′ two-body term (`J(d,a) = π²/(a·(d²+4a²))`,
+  exact) is UV-divergent → a truncation artifact, NOT a model prediction.
+  Non-perturbative (Möbius-subtracted) treatment: the free energy saturates
+  within `r* = √(ℓ/T)` of a point mass; the residual correction
+  `∝ S(ℓ)/d²` probes source structure (saturation moment / ⟨1/r₁₂⟩).
+- Layered lunar-laser-ranging bound (fortnightly modulation) at the purely
+  entropic point, δ = 1e-10:
+  - V₃ only (structure-independent): `T ≳ 4.4 K · (a/1e-13 m)³`
+    (× 100 at δ = 1e-11 — grazing room temperature).
+  - Extended bodies (realistic): `T ≳ 1e10 K · (a/1e-13 m)³`.
   See `figures/llr_constraint.png` and `writeup/three_body_entropic.md`.
 
-## Reproduce (4 commands)
+## Reproduce (5 commands)
 
 ```bash
 uv venv && uv pip install numpy scipy sympy matplotlib mpmath pytest
-.venv/bin/python -m pytest tests/            # 23 gates: expansion, regression, closed forms, signs
-.venv/bin/python notebooks/task1_i3.py       # I₃: π³ limit, isosceles map
-.venv/bin/python notebooks/task3_llr.py      # ε(φ), T_min(a,σ*), constraint figure
+.venv/bin/python -m pytest tests/                     # 33 gates: expansion, regression, closed forms, signs, Möbius
+.venv/bin/python notebooks/task1_i3.py                # I₃: π³ limit, isosceles map
+.venv/bin/python notebooks/task2b_nonperturbative.py  # saturation moments, decision table, final bound
+.venv/bin/python notebooks/task3_llr.py               # ε(φ), harmonic content, benchmark tables
 ```
 
-(`notebooks/task2_j.py` reproduces the J(d) power-law study.)
+(`notebooks/task2_j.py` reproduces the perturbative J(d) power-law study.)
 
 ## Layout
 
 - `src/integrators.py` — spherical-grid 3D integrator (radial map u=r/(r+R₀))
 - `src/analytic.py` — closed forms + Feynman-parametric quadratures
 - `src/model.py` — model coefficients, natural units (GeV), constants
-- `src/solar.py` — Sun-Earth-Moon perturbation ε(φ) and scaling
+- `src/nonperturbative.py` — Möbius-subtracted A₂/A₃ with full g(ω),
+  saturation moment S(ℓ)
+- `src/solar.py` — Sun-Earth-Moon perturbation ε(φ): extended / point /
+  saturated treatments
 - `tests/` — validation gates (all must pass before trusting anything)
 - `writeup/` — `three_body_entropic.md`, `notes_signos.md` (sign audit),
   `email_carney.md`
